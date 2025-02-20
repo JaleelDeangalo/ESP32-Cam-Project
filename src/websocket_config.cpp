@@ -19,13 +19,26 @@ void onWebSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lengt
     }
     break;
 
-    case WStype_TEXT:
-    String message = String((char*) payload);
-    Serial.println(message);
-    int angle = message.toInt();
-    if(angle >= 0 && angle <= 180) {
-      servo.write(angle);
+    case WStype_TEXT: {
+      String message = String((char*) payload);
+      Serial.println(message);
+      int angle = message.toInt();
+      if(angle >= 0 && angle <= 180) {
+        servo.write(angle);
+      }
     }
     break;
+
+    case WStype_BIN: {
+      Serial.printf("Data received:  \n", num, length);
+    }
+    break;
+
+    case WStype_ERROR: {
+      websocket.sendTXT(num, "Error Has Occured");
+    }
+    break;
+    
+  
   }
 }
