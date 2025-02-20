@@ -4,6 +4,18 @@ AsyncWebServer server(80);
 
 void handleJPEG(AsyncWebServerRequest *request) {
 
+AsyncClient *client = request ->client();
+String boundary = "--frame";
+
+client->write("HTTP/1.1 200 OK\r\n");
+client->write("Content-Type: multipart/x-mixed-replace; boundary=" + 52);
+client->write("\r\n");
+
+
+while(client->connected()) {
+    camera_fb_t *fb = esp_camera_fb_get();
+    
+}
     request->send_P(200, "multipart/x-mixed-replace; boundary=frame", "", 0);
     while (request->client()->connected()) {
         camera_fb_t *fb = esp_camera_fb_get();
