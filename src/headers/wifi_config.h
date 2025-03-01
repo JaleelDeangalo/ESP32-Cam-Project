@@ -3,8 +3,8 @@
 
 #include <WiFi.h>
 
-const char* ssid = "CameraNetwork";
-const char* password = "Tech1212!";
+const char* ssid = "Gigi";
+const char* password = "Amber4545@";
 
 
 #endif

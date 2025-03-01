@@ -30,7 +30,7 @@ void onWebSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lengt
     break;
 
     case WStype_BIN: {
-      Serial.printf("Data received:  \n", num, length);
+      Serial.printf("Data received: \n", num, length);
     }
     break;
 
@@ -40,5 +40,22 @@ void onWebSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t lengt
     break;
     
   
+  }
+}
+
+void sendFrame(uint8_t num) {
+  camera_fb_t *fb = esp_camera_fb_get();
+  if (!fb) {
+    Serial.println("Camera capture failed");
+    return;
+  }
+
+  websocket.sendBIN(num, fb->buf, fb->len);
+  esp_camera_fb_return(fb);
+}
+
+void handleVideoStream() {
+  for (int i = 0; i < websocket.connectedClients(); i++) {
+    sendFrame(i);
   }
 }

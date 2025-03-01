@@ -7,9 +7,8 @@
 
 extern AsyncWebServer server;
 
-void handleJPEG(AsyncWebServerRequest *request);
-
 void startCameraServer();
+
 
 
 #endif

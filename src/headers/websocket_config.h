@@ -2,6 +2,8 @@
 #define WEBSOCKET_CONFIG_H
 
 #include <WebSocketsServer.h>
+#include <./headers/cam_object.h>
+#include <./headers/camera_config.h>
 
 extern WebSocketsServer websocket;
 
